@@ -1,0 +1,93 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	background: #fff;
+}
+ul,h3,a{
+	text-decoration: none;
+	color: #fff;
+}
+
+li{
+    list-style:none;
+}
+
+/*去除点击a后的虚线框*/
+#list a:focus{
+	outline:none; 
+}
+
+#list{
+	width: 500px;
+	margin:70px auto;
+	padding: 5px;
+	
+}
+
+#list .lis{
+	margin-bottom:10px;
+}
+
+#list h3{ 
+	height: 50px;
+	line-height:50px;
+	text-indent: 20px;
+    background: url(../images/close.JPG) no-repeat 10px center #f65f57;
+	border-radius: 10px;
+    box-shadow: 2px 6px 2px #B22222;
+    margin-bottom: 5px;
+    font-size: 25px;
+    text-shadow:0 3px 3px #360;
+    font-family: "KaiTi";
+    /*background-image: linear-gradient(to top, green,orange,yellow);*/
+}
+
+#list ul{
+    display: none;
+}
+
+/*最小li列表的样式*/
+#list ul li{
+	line-height: 50px;
+	text-indent: 50px;
+	background-color: #ccc;
+	margin-bottom: 3px;
+	margin-top: 3px;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+
+/*点击li后的样式*/
+#list ul .hover{}
+
+#list li a{
+    display: block;
+}
+
+#list .active{
+	background:url(../images/open.JPG) no-repeat 5px center #f65f57; 
+}
+
+.lis li a{
+	color: #000;
+	font-family: "songti";
+	font-weight: bold;
+}
+
+.lis h3 a:hover{
+    text-indent: 35px;
+    color: #fff;
+    text-shadow:0 3px 3px #360;
+	font-size: 28px;
+
+}
+
+.lis ul li a:hover{
+	text-indent: 60px;
+	border-radius: 5px;
+	text-shadow:0 1px 1px #262626;
+	font-size: 20px;
+}
