@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>模拟手机信息发送</title>
+	<meta name="name" charset=utf-8 content="content">
+	<!--div样式-->
+	<style type="text/css">
+	    *{
+	    	margin: 0;
+	    	padding: 0;
+	    }
+	    #div{
+	    	width:300px;
+	    	height:560px;
+	    	border:5px solid #FFCC99;
+	    	border-radius:40px;  /*圆角效果*/
+	    	margin:40px auto 0;
+	    	position: relative;
+	    }
+	    #top{
+	    	position: absolute;
+	    	width: 50px;
+	    	height: 2px;
+	    	border:3px solid #555555;
+	    	margin: 28px 120px;
+	    	border-radius: 5px;
+
+	    }
+		#div1{
+			position:relative;
+			width:240px;
+			height:410px;
+			border:3px solid #000;
+			margin:65px auto 0;
+			background: #EBEBEB;
+		}
+		#div2{
+            width:45px;
+            height:45px;
+            border:3px solid #ffcc99;
+            border-radius:50px;
+            margin:15px auto 0;
+		}
+		#mesBig{
+			width:240px;
+			height:360px;
+			background-color:#fff;
+			margin-top:5px;
+		}
+		#img{
+			width:28px;
+			height:28px;
+			border:1px solid #ccc;
+			margin:10px 0 0px 5px;
+			position: absolute;
+		}
+		
+		#mesSma{
+			width:140px;
+			height:25px;
+			line-height: 25px;
+			border-radius:10px;	
+			margin: 10px 0px 0px 45px;
+			position: absolute;		
+		}
+		#send{
+			width:38px;
+			height:25px;
+			margin:10px 0 0 195px;
+			font-size: 12px;
+			position: absolute;
+		}
+
+		/*定义没有在body中出现的类，用于js*/
+		li{
+			list-style: none;
+			margin: 3px 3px; 
+			border: 1px solid #fff;
+		}
+		span{
+			max-width:220px;
+			padding:2px;
+			font-size:15px;
+			border-radius: 5px;
+		}
+		.imgLeft{
+			float:left;
+		}
+        .spanLeft{
+        	float:left;
+        	background:#D4D4D4;
+        }
+        .imgRight{
+        	float:right;
+        }
+        .spanRight{
+        	float:right;
+        	background:#BFEFFF;
+        }
+	</style>
+
+	<script type="text/javascript" charset="utf-8">
+	window.onload=function(){
+        var  oDiv=document.getElementById('div1'); 
+        var  oMesBig=document.getElementById("mesBig");
+        var  oMesSma=document.getElementById("mesSma");  
+        var  oSend=document.getElementById("send");    
+        var  aImg=oMesBig.getElementsByTagName('img');
+        var  aPic=oDiv.getElementsByTagName('img')[0];
+        var  aInput=oDiv.getElementsByTagName('input');  
+        var  aSpan=oMesBig.getElementsByTagName('span'); 
+
+        var arrUrl=['images/face1.png','images/face2.png'];   
+        var num=0;
+        var i=-1;
+
+        aImg.src=arrUrl[num];
+
+        //点击图片，图片循环变换
+        aPic.onclick=function(){
+            if(num==0){
+            	aPic.src=arrUrl[1];      
+            	num=1;
+            }else{
+            	aPic.src=arrUrl[0];
+            	num=0;
+            }
+        }
+
+        oSend.onclick = function () {
+                if (aInput[0].value == '') {
+                        alert('输入为空不能发送哦~')
+                }
+                else {
+                        oMesBig.innerHTML += '<li><img src="'+arrUrl[num]+'"><span>' +  aInput[0].value + '</span></li>'+"<br>";
+                        i++;
+
+                        if (num == 0) {
+                                aSpan[i].className = 'spanLeft';
+                                aImg[i].className = 'imgLeft';
+                        }
+                        else {
+                                aSpan[i].className = 'spanRight';
+                                aImg[i].className = 'imgRight';
+                        }
+                        oMesSma.value = '';
+                }
+         }
+    }
+	</script>
+</head>
+<body>
+<div id="div">    <!--手机边框-->
+    <div id="top"></div>
+	<div id="div1">   
+	    <ul id="mesBig"></ul>    <!--大的text显示框,不能用text，因为文字会在中间显示-->
+	    <img id='img' src="images/face1.png"/>
+	    <input id="mesSma" type="text"/>    <!--输入框-->
+        <input id="send" type="button" value="发送"/>
+	</div>
+	<div id="div2"></div>    <!--home键-->
+</div>
+</body>
+</html>
