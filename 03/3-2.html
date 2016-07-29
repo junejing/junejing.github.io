@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>带缩略图的图片切换</title>
+	<meta name="name" charset=utf-8 content="content">
+	<style type="text/css" media="screen">
+		*{margin: 0;padding: 0;}
+		li{list-style: none;}
+		a{width: 50px;height: 50px;line-height: 50px;text-decoration: none;text-align: center;border-radius: 50%;background: #666;color: #fff;font-size: 40px;filter: alpha(opacity=50);opacity: 0.5;top: 120px;position: absolute;}
+		#wrap{width: 600px;height: 300px;margin: 50px auto;position: relative;/*border: 1px solid #000;*/}
+		#wrap img{width: 600px;height: 300px;}
+		#prev{left:20px;}
+		#next{right: 20px;}
+		#wrap a:hover{filter: alpha(opacity=90);opacity: 0.9;background: #EEA900;}
+		#thumbnail{width: 150px; height: 30px;margin: -30px auto;position: relative;}
+		#thumbnail li{float: left;width: 15px;height: 15px;border-radius: 50%;background: #666;margin-left: 10px;position: relative;}
+		#thumbnail li img{width: 100px;height: 80px;position: absolute;border: 5px solid #fff;top: -100px;left: -30px;}
+		#thumbnail .active{background: #EEA900;}
+
+	</style>
+	<script type="text/javascript" charset="utf-8" async defer>
+    window.onload=function(){
+    	var oWrap=document.getElementById('wrap');
+    	var oImg=oWrap.getElementsByTagName('img')[0];
+    	var oPre=document.getElementById('prev');
+    	var oNext=document.getElementById('next');
+    	var oThum=document.getElementById('thumbnail');
+    	var oUl=oThum.getElementsByTagName('ul')[0];
+
+    	var arrImg=[];
+    	var num=0;
+      
+        arrImg=['images/2.jpg','images/3.jpg','images/4.jpg','images/5.jpg','images/6.jpg'];
+        
+        //根据图片数量生成li数
+        for (var i=0;i<arrImg.length;i++) {
+        	oUl.innerHTML+='<li><img src=""/></li>';
+        };
+        
+        var aLi=oUl.getElementsByTagName('li');
+        var oThum_img=oUl.getElementsByTagName('img');      
+
+        //初始化
+        oImg.src=arrImg[num];
+        aLi[num].className='active';
+
+        for(var i=0;i<arrImg.length;i++){
+        	oThum_img.src=arrImg[num];
+            oThum_img[i].style.display='none';
+        }
+
+        //图片切换函数
+        function change(){
+        	oImg.src=arrImg[num];
+        	for (var i=0;i<arrImg.length;i++) {
+        		aLi[i].className='';
+        	};
+        	aLi[num].className='active';
+        }
+
+        //左边翻页
+        oPre.onclick=function(){
+        	num--;
+        	if(num==-1){
+        		num=arrImg.length-1;
+        	}
+        	change();
+        }
+
+        //右边翻页
+        oNext.onclick=function(){
+        	num++;
+        	if(num==arrImg.length){
+        		num=0;
+        	}
+        	change();
+        }
+
+        //缩略图效果
+        for(var i=0;i<aLi.length;i++){
+
+           aLi[i].index=i;
+
+           aLi[i].onmouseover=function(){
+           	   oThum_img[this.index].src=arrImg[this.index];
+               oThum_img[this.index].style.display='block';
+           }
+
+           aLi[i].onmouseout=function(){
+           	   oThum_img[this.index].style.display='none';
+           }
+
+           aLi[i].onclick=function(){
+           	num=this.index;
+           	change();
+           }
+
+        }
+
+    }
+	</script>
+</head>
+<body>
+    <div id='wrap'>
+        <img src=" ">
+    	<a href="javascript:;" id='prev'>&lt;</a>
+    	<a href="javascript:;" id='next'>&gt;</a>
+    </div>
+    <div id="thumbnail">
+    	<ul>
+    		<!-- <li></li>
+    		<li></li>
+    		<li></li>
+    		<li></li> -->
+    	</ul>
+    </div>
+
+</body>
+</html>
