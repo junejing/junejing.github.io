@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>百度文库评分</title>
+	<style type="text/css">
+		.wrap{
+			width: 500px;
+			height: 80px;
+			line-height: 80px;
+			border: 1px solid #333;	
+			margin: 30px auto;
+			position: relative;
+		}
+		h3{
+			display: inline;
+			font-size: 16px;
+			font-weight: normal;
+		}
+		a{
+			text-decoration: none;
+		}
+		img{
+			border:0;
+			vertical-align: middle;
+		}
+	#tip{
+		position: absolute;
+		right: 20px;
+		top: 20px;
+		width: 250px;
+		height: 40px;
+		font-size: 12px;
+		line-height: 40px;
+		background: #ffffe7 url(images/bg.gif) no-repeat right center;
+		border: 1px solid #dedeb5;
+	}
+	#tip strong{
+		font-weight: normal;
+		color: #94948c;
+	}
+	em{
+		font-size: 14px;
+		font-style: normal;
+		color: #ef7300;
+		padding-left: 2em;
+	}
+
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<h3>总体评分：</h3>
+		<a href="#"><img src="images/1.gif" alt=""></a>
+		<a href="#"><img src="images/1.gif" alt=""></a>
+		<a href="#"><img src="images/1.gif" alt=""></a>
+		<a href="#"><img src="images/1.gif" alt=""></a>
+		<a href="#"><img src="images/1.gif" alt=""></a>
+		<div id="tip">
+			<strong>小提示：点击小星星就能打分</strong>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	var oA = document.getElementsByTagName('a');
+	var oImg = document.getElementsByTagName('img');
+	var tip = document.getElementById('tip');
+	//创建em 表示评分等级关键词
+	var level = document.createElement('em');
+	tip.parentNode.insertBefore(level,tip);
+	var levelText = ['很差','还行','一般','推荐','力荐'];
+	var imgSrc = ['images/1.gif','images/2.gif','images/3.gif','images/4.gif']
+	var temp = 0;//用来标识点击了第几颗星星
+	var num =0;
+
+	for(var i=0;i<oA.length;i++){
+		oA[i].index = i;
+		oA[i].onmouseover = function(){
+			//先全部清空再显示当前与之前的
+			clear();
+			show( this.index+1,2);
+			//隐藏小提示并显示评分等级
+			tip.style.display = 'none';
+			level.innerHTML = levelText[this.index];
+		}
+
+		oA[i].onmouseout = function(){	
+			for(var j=0;j<=this.index;j++){
+				oImg[j].src = imgSrc[0];	
+			}
+			//鼠标移开后显示的星星，如果没有点击那temp=0就没有星星亮，点击了第几颗就亮几颗
+			show(temp,3);
+			//如果temp=0，也就是没有点击的话，那当鼠标移开后会继续显示小提示，点击过了的话就不会显示了	
+			if(!temp){
+				tip.style.display = 'block';
+				level.innerHTML = '';
+			}			
+		}
+		oA[i].onclick = function(){
+			//点击了第几颗：索引值+1
+			temp = this.index+1;
+			show(temp,3);
+		}
+	}
+
+
+	//将所有星星都恢复原始状态
+	function clear(){
+		for(var i=0;i<oA.length;i++){
+			oImg[i].src = imgSrc[0];
+		}
+	}
+
+	//显示星星
+	function show(index,n){
+		for(var i=0;i<index;i++){	
+			if(index<=2){
+				oImg[i].src = imgSrc[1];
+			}
+			else{
+				oImg[i].src = imgSrc[n];
+			}
+		}
+	}
+</script>
+</html>
