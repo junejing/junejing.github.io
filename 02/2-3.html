@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>QQ号码输入验证</title>
+<script>
+window.onload=function(){
+	var aIn=document.getElementsByTagName('input');
+	var str=''; 
+	 
+	aIn[1].onclick=function(){
+	    str=aIn[0].value;
+		if(str==''){
+	        alert('请输入');
+		}
+
+		else if(isNaN(str)){
+			alert(str+'不是数字，请重新输入');	
+			aIn[0].value='';		
+		}
+
+		else if(String(Number(str)).length!=str.length){
+		   alert('第一位不能为0或者中间不能有空格，请重新输入');	
+		   aIn[0].value='';	   
+		}
+		
+		else if(parseInt(str)!=parseFloat(str)){
+			alert('不能是小数，请重新输入');
+			aIn[0].value='';			    
+		}
+
+		else if(str.length<5||str.length>10){
+		    alert('位数介于5到10之间，请重新输入');
+		    aIn[0].value='';
+        }
+      
+        else{
+            alert('您输入的QQ号码是：'+str);
+            aIn[0].value='';
+        }
+         
+	}
+}
+</script>
+</head>
+
+<body>
+    请输入QQ号码：<input type="text"/>
+                 <input type="button" value="判断"/><br>
+                 <h3>QQ号码输入验证信息：</h3>
+                 1.有没有输入 <br>
+                 2.输入的是不是数字 <br>
+                 3.不能有0在前面  <br>
+                 4.不能是小数  <br>
+                 5.输入的数字必须在5位以上、10位以内  <br>
+</body>
+</html>
