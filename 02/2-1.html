@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>弹出层设置div属性</title>
+	<meta name="name" charset=utf-8 content="content">
+	<style type="text/css" media="screen">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		a{
+			text-decoration: none;
+            text-align: center;
+			cursor: pointer;
+		}
+		a:focus{
+			outline: none;
+		}
+        li{
+            list-style: none;
+        }
+		#div{
+			width: 150px;
+			height: 150px;
+			border: 3px solid #000;
+            margin-left: 50px;
+            position: absolute;
+		}
+        h2{
+            margin: 40px 0 40px 40px;
+            display: inline-block;
+        }
+        #show{
+            background: red;
+            font-size: 16px; 
+            width: 80px;
+            height: 30px;
+            line-height: 30px;
+            display: inline-block;
+            border-radius: 5px;
+        }
+        #popup{
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: #666;
+            filter: opacity(60);
+            opacity: 0.6;
+            z-index: 1;
+        }
+        #set{
+            display: none;
+            position: relative;
+            margin-left: 650px;
+            margin-top: 100px;
+            width: 300px;
+            height: 200px;
+            border: 10px solid #ccc;
+            background: #fff;
+            border-radius: 10px;
+            z-index: 2;
+        }
+        ul li{
+            margin: 15px;
+        }
+        ul li a{
+            background: #EFEFEF;
+            width: 30px;
+            height: 25px;
+            line-height: 28px;
+            font-size: 15px;
+            border: 1px solid #C0C0C0;
+            color: #808080;
+            display: inline-block;
+            border-radius: 5px;
+        }
+        #sure,#reset{
+            width: 60px;
+            height: 25px;
+            line-height: 25px;
+            background: #032A51;
+            color: #fff;
+            margin-left: 45px;
+            margin-top: 10px;
+            border-radius: 0px;
+        }
+
+        #width1:hover,#width2:hover,#width3:hover,#height1:hover,#height2:hover,#height3:hover{
+            background: #ED9324;
+            border: 1px solid #000;
+            border-radius: 0px;
+            color: #000;
+        }
+
+        #color1:hover,#color2:hover,#color3:hover{
+            border-radius: 0px;
+            border: 1px solid #000;
+        }
+
+        #color1{background: #FA8072;}
+        #color2{background: #EEC900;}
+        #color3{background: #87cecc;}
+        
+        #color1:hover{
+            background:red;
+            color: #fff;
+        }
+        #color2:hover{
+            background:yellow;
+            color: #000;
+        }
+        #color3:hover{
+            background:blue;
+            color: #fff;
+        }
+
+	</style>
+    <script type="text/javascript" charset="utf-8" async defer>
+    window.onload=function(){
+        var oPop=document.getElementById("popup");
+        var oSet=document.getElementById("set");
+        var oDiv=document.getElementById("div");
+        var oSure=document.getElementById("sure");
+        var oReset=document.getElementById("reset");
+        var oShow=document.getElementById("show");
+        var oColor1=document.getElementById("color1");
+        var oColor2=document.getElementById("color2");
+        var oColor3=document.getElementById("color3");
+        var oWidth1=document.getElementById("width1");
+        var oWidth2=document.getElementById("width2");
+        var oWidth3=document.getElementById("width3");
+        var oHeight1=document.getElementById("height1");
+        var oHeight2=document.getElementById("height2");
+        var oHeight3=document.getElementById("height3");
+        var oBtn1=document.getElementById("btn1");
+        var oBtn2=document.getElementById("btn2");
+
+        oShow.onclick=function(){
+            oPop.style.display="block";
+            oSet.style.display="block";
+        }
+
+        oColor1.onclick=function(){
+            oDiv.style.background="#FA8072";
+        }
+        oColor2.onclick=function(){
+            oDiv.style.background="yellow";
+        }
+        oColor3.onclick=function(){
+            oDiv.style.background="#87cecc";
+        }
+
+        oWidth1.onclick=function(){
+            oDiv.style.width="200px";
+        }
+        oWidth2.onclick=function(){
+            oDiv.style.width="300px";
+        }
+        oWidth3.onclick=function(){
+            oDiv.style.width="400px";
+        }
+
+        oHeight1.onclick=function(){
+            oDiv.style.height="200px";
+        }
+        oHeight2.onclick=function(){
+            oDiv.style.height="300px";
+        }
+        oHeight3.onclick=function(){
+            oDiv.style.height="400px";
+        }
+        
+        oPop.onclick=hide;
+        oSure.onclick=hide;
+
+        oReset.onclick=function(){
+            oDiv.style.width = "150px";
+            oDiv.style.height = "150px";
+            oDiv.style.background = "";
+        }
+
+        function hide(){
+            oPop.style.display="none";
+            oSet.style.display="none";
+        }
+
+    }
+    </script>
+</head>
+<body>
+    <h2>请为下面的DIV设置样式：</h2>
+    <a id="show">点击设置</a>
+    <div id="div"></div>
+    <div id="popup"></div>
+    <div id="set">
+    	<ul>
+    		<li>
+    			请选择背景色：
+    			<a id="color1">红</a>
+    			<a id="color2">黄</a>
+    			<a id="color3">蓝</a>
+    		</li>
+
+    		<li>
+    			请选择宽度：
+    			<a id="width1">200</a>
+    			<a id="width2">300</a>
+    			<a id="width3">400</a>
+    		</li>
+
+    		<li>
+    			请选择高度：
+    			<a id="height1">200</a>
+    			<a id="height2">300</a>
+    			<a id="height3">400</a>
+    		</li>
+
+    		<li>
+                <a id="sure">确定</a>
+                <a id="reset">重置</a>
+    		</li>
+    	</ul>
+    </div>
+
+</body>
+</html>
