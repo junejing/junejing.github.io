@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>弹出提示框</title>
+	<meta name="name" charset=utf-8 content="content">
+	<style type="text/css" media="screen">
+		*{margin: 0;padding: 0;}
+		body{background: #fff;}
+		img{width: 80px;height: 80px;border-radius: 10px;cursor: pointer;z-index: 1;}
+		li{list-style: none;float: left;margin:10px;margin-bottom: 15px;position: relative;display: block;text-align: center;}
+		.wrapper{width: 600px;margin: 150px auto;}
+        .content{border-top: 1px solid #666;border-bottom: 1px solid #666;text-align: center;}
+        span{height: 30px;line-height: 30px;font-size: 13px;cursor: pointer;position: absolute;display: block;margin-left: 15px;}
+        .popup{width: 150px;height: 160px;text-align: center;text-indent: 2em;left: 20px;top: -150px;background: #FFFFF0;position: absolute;display: none;z-index: 2;cursor: pointer;font-size: 15px;border-radius: 10px;border: 3px solid red;padding: 8px;line-height: 20px;}
+	</style>
+	<script type="text/javascript" charset="utf-8" async defer>
+    window.onload=function(){
+    	var aLi=document.getElementsByTagName('li');
+
+    	for(var i=0;i<aLi.length;i++){
+
+            aLi[i].onmouseover=function(){
+                this.getElementsByTagName('div')[0].style.display='block';
+            }
+            aLi[i].onmouseout=function(){
+            	this.getElementsByTagName('div')[0].style.display='none';
+            }
+
+    	}
+
+    }
+	</script>
+</head>
+<body>  
+  <div class='wrapper'>
+    <h2>最新上线</h2>
+      <div class="content">
+    	<ul>
+    		<li>
+    			<img src="images/7.JPG" alt="">
+    			<span>今日头条</span>
+    			<div class="popup">基于个性化推荐引擎技术，根据每个用户的兴趣、位置等多个维度进行个性化推荐，推荐内容不仅包括狭义上的新闻，还包括音乐、电影、游戏、购物等资讯。</div>
+    		</li>
+    		<li>
+    			<img src="images/8.JPG" alt="">
+    			<span>QQ阅读</span>
+    			<div class="popup">QQ阅读是腾讯公司开发的一款手机看书软件，全面支持TXT、UMD、HTML、EPUB、DOC等多种电子书格式，还可在QQ书城免费下载最新热门小说。</div>
+    		</li>
+    		<li>
+    			<img src="images/9.JPG" alt="">
+    			<span>淘宝</span>
+    			<div class="popup">淘宝网是中国深受欢迎的网购零售平台，拥有近5亿的注册用户数，每天有超过6000万的固定访客，同时每天的在线商品数已经超过了8亿件，平均每分钟售出4.8万件商品。</div>
+    		</li>
+    		<li>
+    			<img src="images/10.JPG" alt="">
+    			<span>天天购物</span>
+    			<div class="popup">天天购物全称天天购物网，是著名的电子商务和目录销售企业，是目前中国最大的时尚、女性、白领生活用品网上购物商城。</div>
+    		</li>
+    		<li>
+    			<img src="images/11.JPG" alt="">
+    			<span>开心消消乐</span>
+    			<div class="popup">《开心消消乐》是一款三消游戏，玩家只需滑动手指让三个及以上的同色小动物横竖相连即可消除，完成每关的指定消除目标就可以过关。</div>
+    		</li>
+    		<li>
+    			<img src="images/12.JPG" alt="">
+    			<span>棒直播</span>
+    			<div class="popup">超棒（Bang）的网红必备的美颜直播赚钱神器。属于90、00后的特效礼物：豪华法拉利、国民老公宋仲基、爱的抱抱等！</div>
+    		</li>
+    		<li>
+    			<img src="images/13.JPG" alt="">
+    			<span>零钱购</span>
+    			<div class="popup">零钱购是结合SNS和购物分享的社会化零食分享网站。零钱购以用户体验为首要目标，相对购物来说，零钱购更侧重于导购与评论交友。</div>
+    		</li>
+    		<li>
+    			<img src="images/14.JPG" alt="">
+    			<span>捕鱼达人</span>
+    			<div class="popup">在这里可以施展各种捕鱼技能，享受捕获大鱼的乐趣，但不是所有的鱼都是友善的，它们会用自己的方式保护自己，保卫属于自己的海底世界。</div>
+    		</li>
+    		<li>
+    			<img src="images/15.JPG" alt="">
+    			<span>世界OL</span>
+    			<div class="popup">《世界OL》是由广州谷得网络科技有限公司研发的一款角色扮演回合制游戏，于2011年9月26日发行。</div>
+    		</li>
+    		<li>
+    			<img src="images/16.JPG" alt="">
+    			<span>平安WiFi</span>
+    			<div class="popup">平安WiFi APP是中国平安集团推出的一款移动互联网APP产品，累计下载量过亿次，实名注册用户超过6000万，月活跃用户数超2000万。</div>
+    		</li>
+    		<li>
+    			<img src="images/17.JPG" alt="">
+    			<span>御剑情缘</span>
+    			<div class="popup">《御剑情缘》手游借助电影高清远景、全局光照探针等技术带来360度全景超清梦幻仙境。</div>
+    		</li>
+    		<li>
+    			<img src="images/18.JPG" alt="">
+    			<span>免费电子书</span>
+    			<div class="popup">免费电子书网是2008年10月份建立的免费txt小说，全天24小时间断更新小说，使大家能在第一时间内看到自己喜欢看的，想看的精彩小说。</div>
+    		</li>
+    	</ul>
+    </div>
+  </div>
+</body>
+</html>
