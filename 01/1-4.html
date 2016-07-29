@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CSS3 制作3D视频展区</title>
+	<meta name="name" charset=utf-8 content="content">
+	<style type="text/css" media="screen">
+	    *{
+	    	margin: 0;
+	    	padding: 0;
+	    }
+		body{
+			margin-top: 50px;
+			background: #FFF5EE;
+			text-align: center;
+		}
+		img{
+			width: 180px;
+			height: 230px;
+		}
+        #div{
+        	margin-left: 80px;
+        	width: 1024px;
+        }
+        #div h1{
+        	font-family: "KaiTi";
+        	font-size: 40px;
+        	color: #2F0000;
+        	text-shadow: 2px 3px 5px rgba(0,0,0,0.5);
+        	margin-left: 400px;
+        }
+        .wrapper{
+        	display: inline-block;
+        	width: 1500px;
+        	/*height: 230px;*/
+        	vertical-align: top;/*定义行内元素的基线相对于该元素所在行的基线的垂直对;top:把元素的顶端与行中最高元素的顶端对齐*/
+        	/*margin: 1em 1.5em 2em 0;*/
+        	cursor: pointer; /*鼠标指针放在一个元素边界范围内时所用的光标形状;pointer:光标呈现为指示链接的指针（一只手）*/
+        	position: relative;
+        }
+        .video{
+        	height: 230px;
+        	margin-top: 50px;
+        	margin-left: 250px;
+        	float: left;
+        	-webkit-transform-style: preserve-3d;  /*preserve-3d：子元素将保留其3D位置*/
+	        -moz-transform-style: preserve-3d;
+	        -ms-transform-style: preserve-3d;
+	        -o-transform-style: preserve-3d;
+	        transform-style: preserve-3d;
+	        -webkit-transition: -webkit-transform .6s;  /*transform3D属性 0.6s完成*/
+	        -moz-transition: -moz-transform .6s;
+	        -ms-transition: -ms-transform .6s;
+	        -o-transition: -o-transform .6s;
+	        transition: transform .6s;
+        }
+        .video:hover{
+        	-webkit-transform: translateZ(-50px) rotateX(95deg);
+            -moz-transform: translateZ(-50px) rotateX(95deg);
+            -ms-transform: translateZ(-50px) rotateX(95deg);
+            -o-transform: translateZ(-50px) rotateX(95deg);
+            transform: translateZ(-50px) rotateX(95deg);
+        }
+        .video img{
+        	position: absolute;
+        	display: block;
+        	border-radius: 5px;
+        	box-shadow: 0px 4px 8px rgba(0,0,0,0.7);
+        	-webkit-transform: translateZ(50px);
+            -moz-transform: translateZ(50px);
+            -ms-transform: translateZ(50px);
+            -o-transform: translateZ(50px);
+            transform: translateZ(50px);
+            -webkit-transition: all .6s;
+            -moz-transition: all .6s;
+            -ms-transition: all .6s;
+            -o-transition: all .6s;
+            transition: all .6s;
+        }
+        .video .introduction {
+            display: block;
+            position: absolute;
+            top: 0;
+            height: 210px;
+            width: 160px;
+            text-align: left;
+            border-radius: 20px;
+            padding: 10px;
+            font-size: 12px;
+            text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
+            box-shadow: none;
+            background: rgb(236,241,244);
+            background: -webkit-linear-gradient(to bottom,  rgba(236,241,244,1) 0%,rgba(190,202,217,1) 100%);
+            background: -ms-linear-gradient(to bottom,  rgba(236,241,244,1) 0%,rgba(190,202,217,1) 100%);
+            background: linear-gradient(to bottom,  rgba(236,241,244,1) 0%,rgba(190,202,217,1) 100%);
+
+            -webkit-transform: rotateX(-90deg) translateZ(50px);
+            -moz-transform: rotateX(-90deg) translateZ(50px);
+            -ms-transform: rotateX(-90deg) translateZ(50px);
+            -o-transform: rotateX(-90deg) translateZ(50px);
+            transform: rotateX(-90deg) translateZ(50px);
+            -webkit-transition: all .6s;
+            -moz-transition: all .6s;
+            -ms-transition: all .6s;
+            -o-transition: all .6s;
+            transition: all .6s;
+        }
+        .introduction strong {
+           display: block;
+           margin: .2em 0 .2em 0;
+           font-size: 20px;
+           font-family: "Oleo Script";
+        }
+        .video:hover img {
+           box-shadow: none;
+           border-radius: 15px;
+        }
+      
+        .video:hover .introduction {
+           box-shadow: 0px 4px 8px rgba(0,0,0,0.5);
+           border-radius: 10px;
+        }
+
+
+	</style>
+</head>
+<body>
+    <div id="div">
+        <h1>CSS3 制作3D视频展区</h1>
+        <div class="wrapper">
+        	<div class="video">
+        		<img src="images/video1.jpg" />
+        		<span class="introduction"><strong>七号房的礼物</strong><br>
+        		&nbsp;&nbsp;&nbsp;&nbsp;讲述了智商有问题的爸爸被诬陷强奸并杀害警察局长的女儿，被强行关进监狱，狱友们帮助女儿混进爸爸的牢房（七号房），爸爸为了保护女儿选择抗下莫须有的罪名最终被执行死刑，女儿长大后帮爸爸翻案。</span>
+        	</div>
+        	<div class="video">
+        		<img src="images/video2.jpg" />
+        		<span class="introduction"><strong>北京遇上西雅图</strong><br>
+        		&nbsp;&nbsp;&nbsp;&nbsp;讲述了“拜金女”文佳佳怀孕后到美国待产，遇到了月子公司的司机兼护工Frank。文佳佳的情人在国内出事，停了她的信用卡；Frank的老婆太强势，离婚还带走了女儿。于是，这一对开始慢慢走近，最终两人在帝国大厦的顶楼定情。</span>
+        	</div>
+            <div class="video">
+        		<img src="images/video3.jpg" />
+        		<span class="introduction"><strong>房间</strong><br>
+        		&nbsp;&nbsp;&nbsp;&nbsp;该片改编自爱玛·多诺霍的同名原著小说，讲述了一个女孩被邻居所骗，之后被囚禁在一个狭小的房间里长达七年之久的故事。</span>
+        	</div>
+        	<div class="video">
+        		<img src="images/video4.jpg" />
+        		<span class="introduction"><strong>暮光之城</strong><br>
+        		&nbsp;&nbsp;&nbsp;&nbsp;该片改编自Stephanie Meyer写的一本恐怖但是却浪漫的同名小说，《暮光之城》系列以贝拉和爱德华的情感纠葛为主线，融合了吸血鬼、狼人、校园生活、恐怖悬念、喜剧冒险等各种吸引眼球的元素，而凄美动人的爱情则是该片的主旋律。</span>
+        	</div>
+
+        </div>
+    	
+    </div>
+</body>
+</html>
