@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>图片下拉遮罩层</title>
+	<meta name="name" charset=utf-8 content="content">
+	<style type="text/css" media="screen">
+		*{margin: 0;padding: 0;}
+		body{background: #fff;}
+		img{width: 80px;height: 80px;border-radius: 10px;cursor: pointer;z-index: 1;}
+		li{width: 80px;height: 110px;list-style: none;float: left;margin:10px;margin-bottom: 15px;position: relative;display: block;text-align: center;border: 1px solid #ccc;box-shadow: 2px 3px 5px #666;display: inline-block;overflow: hidden;}
+		.wrapper{width: 700px;margin: 150px auto;}
+        .content{border-top: 1px solid #666;border-bottom: 1px solid #666;text-align: center;z-index: 2;}
+        span{height: 30px;line-height: 30px;font-size: 13px;cursor: pointer;position: absolute;display: block;margin-left: 15px;text-align: center;}
+        .popup{width: 80px;height:110px;top: -115px;overflow: hidden;text-align: center;left: -2px;background: #000;position: absolute;font-size: 15px;border: 3px solid #fff;line-height: 20px;z-index:3；filter: alpha(opacity=0.7);opacity: 0.7;}
+        .popup a{width: 50px;height: 22px;line-height: 22px;text-align: center;display: block;background: #ff5200;color: #fff;display: block;position: absolute;cursor: pointer;font-weight: bold;margin-top: 40px;margin-left: 15px;border-radius: 5px;z-index:3；}
+        .popup a:hover{text-decoration: underline;background: red;font-size: 22px;}
+	</style>
+	<script type="text/javascript" charset="utf-8" async defer>
+    window.onload=function(){ 
+    	var aLi=document.getElementsByTagName('li');
+        var timer=null;
+        var flag=0;
+
+        for(var i=0; i<aLi.length; i++){
+
+            aLi[i].onmouseover=function(){
+                var oDiv=this.getElementsByTagName('div')[0];
+                doMove(oDiv, 'top', 13, -2);
+
+            }
+            aLi[i].onmouseout=function(){
+                var oDiv=this.getElementsByTagName('div')[0];
+                doMove(oDiv, 'top', 13, -113);
+            }
+        }
+
+        function getStyle(obj, attr){  //attr样式名称
+                return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj)[attr];
+            }
+    
+        function doMove ( obj, attr, dir, target, endFn ) {
+            dir = parseInt(getStyle( obj, attr )) < target ? dir : -dir;
+            clearInterval( obj.timer );
+            obj.timer = setInterval(function () {
+                var speed = parseInt(getStyle( obj, attr )) + dir;
+                if ( speed > target && dir > 0 ||  speed < target && dir < 0  ) {
+                    speed = target;
+                }
+                obj.style[attr] = speed + 'px';
+                if ( speed == target ) {
+                    clearInterval( obj.timer );
+                    endFn && endFn();
+                }
+            }, 30);
+        }        
+
+    }
+   </script>
+</head>
+<body>  
+  <div class='wrapper'>
+    <h2>最新上线</h2>
+      <div class="content">
+    	<ul>
+    		<li>
+    			<img src="images/7.JPG" alt="">
+    			<span class='item'>今日头条</span>
+    			<div class="popup"><a target="#">下载</span></div>
+    		</li>
+    		<li>
+    			<img src="images/8.JPG" alt="">
+    			<span>QQ阅读</span>
+    			<div class="popup"><a target="#">下载</span></div>
+    		</li>
+    		<li>
+    			<img src="images/9.JPG" alt="">
+    			<span>淘宝</span>
+    			<div class="popup"><a target="#">下载</span></div>
+    		</li>
+    		<li>
+    			<img src="images/10.JPG" alt="">
+    			<span>天天购物</span>
+    			<div class="popup"><a target="#">下载</span></div>
+    		</li>
+    		<li>
+    			<img src="images/11.JPG" alt="">
+    			<span>开心消消乐</span>
+    			<div class="popup"><a target="#">下载</span></div>
+    		</li>
+    		<li>
+    			<img src="images/12.JPG" alt="">
+    			<span>棒直播</span>
+    			<div class="popup"><a target="#">下载</span></div>
+    		</li>
+    		<li>
+    			<img src="images/13.JPG" alt="">
+    			<span>零钱购</span>
+    			<div class="popup"><a target="#">下载</span></div>
+    		</li>
+    		<li>
+    			<img src="images/14.JPG" alt="">
+    			<span>捕鱼达人</span>
+    			<div class="popup"><a target="#">下载</span></div>
+    		</li>
+    		<li>
+    			<img src="images/15.JPG" alt="">
+    			<span>世界OL</span>
+    			<div class="popup"><a target="#">下载</span></div>
+    		</li>
+    		<li>
+    			<img src="images/16.JPG" alt="">
+    			<span>平安WiFi</span>
+    			<div class="popup"><a target="#">下载</span></div>
+    		</li>
+    		<li>
+    			<img src="images/17.JPG" alt="">
+    			<span>御剑情缘</span>
+    			<div class="popup"><a target="#">下载</span></div>
+    		</li>
+    		<li>
+    			<img src="images/18.JPG" alt="">
+    			<span>免费电子书</span>
+    			<div class="popup"><a target="#">下载</span></div>
+    		</li>
+    	</ul>
+    </div>
+  </div>
+</body>
+</html>
