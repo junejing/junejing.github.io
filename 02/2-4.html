@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>商品价格计算</title>
+</head>
+   
+<body>
+<ul id="list">
+  <li>
+    <input type="button" value="-"/>
+    <strong>0</strong>
+    <input type="button" value="+"/>
+    单价：<em>12.5元</em>
+    小计：<span>0元</span>
+  </li>
+
+  <li>
+    <input type="button" value="-"/>
+    <strong>0</strong>
+    <input type="button" value="+"/>
+    单价：<em>10.5元</em>
+    小计：<span>0元</span>
+  </li>
+
+  <li>
+    <input type="button" value="-"/>
+    <strong>0</strong>
+    <input type="button" value="+"/>
+    单价：<em>8.5元</em>
+    小计：<span>0元</span>
+  </li>
+
+  <li>
+    <input type="button" value="-"/>
+    <strong>0</strong>
+    <input type="button" value="+"/>
+    单价：<em>10元</em>
+    小计：<span>0元</span>
+  </li>
+</ul>
+<p>商品合计共：<span>0</span>件<br>
+   共花费了：<span>0</span>元<br>
+   其中最贵的商品单价是：<span>0</span>元
+</p>
+
+<script>
+	var oUl = document.getElementById("list");
+	var oLi = oUl.getElementsByTagName("li");
+	var oP = document.getElementsByTagName("p")[0];
+	var pSpan = oP.getElementsByTagName("span");
+
+	for(var i=0;i<oLi.length;i++){
+		calculate(oLi[i]);	
+	}
+
+	function calculate(oLi){
+		var oBtn = oLi.getElementsByTagName("input");
+		var oStrong = oLi.getElementsByTagName("strong")[0];
+		var oEm = oLi.getElementsByTagName("em")[0];
+		var oSpan = oLi.getElementsByTagName("span")[0];
+		var number = parseInt(oStrong.innerHTML);
+		var unit = parseFloat(oEm.innerHTML);
+		oBtn[0].onclick = function(){
+			number--;
+			if(number<0){
+				number=0;
+			}
+			oStrong.innerHTML = number;
+			oSpan.innerHTML  = unit*number+'元';
+			statistics();
+			
+		}
+		oBtn[1].onclick = function(){
+			number++;
+			oStrong.innerHTML = number;
+			oSpan.innerHTML  = unit*number+'元';
+			statistics();	
+		}
+	}
+
+	//底部的动态统计函数
+	function statistics(){
+		var oStrong = oUl.getElementsByTagName("strong");//数量
+		var oSpan = oUl.getElementsByTagName("span");//单项小计
+		var oEm = oUl.getElementsByTagName("em");//单价
+		var amount_n = 0;//总数量（局部变量每次调用该函数均清空一次）
+		var amount_p = 0;//总价
+		var max_price = [];
+
+		for(var i=0;i<oLi.length;i++){
+			amount_n+=parseInt(oStrong[i].innerHTML);
+			amount_p+=parseFloat(oSpan[i].innerHTML);
+
+			if(parseInt(oStrong[i].innerHTML)){
+				max_price[max_price.length] = parseFloat(oEm[i].innerHTML);
+			}
+		}
+
+		//利用数组的sort方法对数组进行从大到小的排序
+		max_price.sort(function(a,b){return b-a;});
+
+		if(amount_n==0){
+			max_price[0] = 0;
+		}
+		
+		pSpan[0].innerHTML = amount_n+'件';
+		pSpan[1].innerHTML = amount_p+'元';
+		pSpan[2].innerHTML = max_price[0]+'元';
+
+	}
+</script>
+</body>
+</html>
