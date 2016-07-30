@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>隔行变色</title>
+	<meta name="name" charset=utf-8 content="content">
+	<style type="text/css" media="screen">
+		*{margin: 0;padding: 0;}
+		body{background: #fff;}
+		#tab{width: 600px;font-size: 18px;line-height:35px;text-align: center;margin: 100px auto;border-collapse: collapse;border: 1px solid #ccc;}
+		#tab th, #tab td{border: 1px solid #ccc;}
+		#tab th{background: #f5f5f5;}
+
+	</style>
+	<script type="text/javascript" charset="utf-8" async defer>
+	window.onload=function(){
+		var oTab=document.getElementById('tab');
+		var aTr=oTab.getElementsByTagName('tr');
+		var tmp='';
+
+        for(var i=0;i<aTr.length;i++){
+        	aTr[i].style.background=i%2 ?  '#dff0d8':'';
+
+            if(i>0){
+            	this.index=i;
+
+            	aTr[i].onmouseover=function(){
+
+            		tmp=this.style.background;     //保存之前的background
+                    this.style.background='#fcf8e3';
+                    if(this.index==0){
+                    	return;
+                    }
+            	}
+
+                aTr[i].onmouseout=function(){
+                     if(this.index==0){
+                     	return;
+                     }
+                     this.style.background=tmp;
+                }
+            }
+
+        }
+
+	}
+	</script>
+</head>
+<body>
+   <table id='tab' border="1px" width="400px">
+   	<thead id='head'>
+   		<tr>
+   			<th>ID</th>
+   			<th>姓名</th>
+   			<th>备注</th>
+   		</tr>
+   	</thead>
+   	<tbody>
+   		<tr>
+   			<td>1</td>
+   			<td>鹿晗</td>
+   			<td></td>
+   		</tr>
+   		<tr>
+   			<td>2</td>
+   			<td>张艺兴</td>
+   			<td></td>
+   		</tr>
+   		<tr>
+   			<td>3</td>
+   			<td>孙红雷</td>
+   			<td></td>
+   		</tr>
+   		<tr>
+   			<td>4</td>
+   			<td>罗志祥</td>
+   			<td></td>
+   		</tr>
+   	</tbody>
+   </table>
+</body>
+</html>
