@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图片自动切换-只准用两个img标签</title>
+	<style>
+		*{margin: 0;padding: 0;}
+	    li{list-style: none;}
+	    img{width: 600px;height: 400px;}
+	    #showbox{width: 600px;height: 400px;margin: 30px auto;/*border: 1px solid #000;*/position: relative;overflow: hidden;}
+	    #wrap{width: 600px;height: 400px;position: absolute;top: 0;left: 0;}
+	    #prev,#next{width: 40px; height: 40px; background: #000; opacity: 0.5; border-radius: 40px; color: #fff; text-align: center; line-height: 40px; font-weight: bold; font-size: 30px; position: absolute; top: 200px; margin-top: -20px; cursor: pointer;}
+	    #prev{left: 10px;}
+	    #next:hover,#prev:hover{transform: scale(1.5);background: #fff;color: #666;font-size: 30px;font-weight: bolder;}
+	    #next{right: 10px;}
+	    #bullets{width: 600px;bottom: 10px;position: absolute;margin-left: 200px;}
+	    #bullets li{float: left;width: 20px;height: 20px;border-radius: 50%;background: #666;cursor: pointer;margin-right: 10px;display: inline-block;filter: alpha(opacity=0.6);opacity: 0.6;}
+	    #bullets .active{background: #000;}
+	</style>
+	<script>
+		window.onload=function(){
+			var oShowbox=document.getElementById('showbox');
+			var oWrap=document.getElementById('wrap');
+			var oPrev=document.getElementById('prev');
+			var oNext=document.getElementById('next');
+			var oBullets=document.getElementById('bullets');
+			var aLi=oBullets.getElementsByTagName('li');
+			var aImg=oWrap.getElementsByTagName('img');
+			var arrImg=['images/17.jpg', 'images/18.jpg', 'images/19.jpg', 'images/15.jpg', 'images/16.jpg'];
+			var timer=null;
+			var num=0;
+
+			oWrap.moved=true;
+
+			//根据图片数量生成li数
+            for (var i=0;i<arrImg.length;i++) {
+            	oBullets.innerHTML+='<li></li>';
+            };
+
+            //初始化
+			aImg[0].src=arrImg[0];
+			aImg[1].src=arrImg[1];
+			aLi[0].className='active';
+
+			//定时器：自动切换图片
+			function fnTime(){
+				timer=setInterval(function(){
+				    aImg[1].style.position='absolute';
+				    aImg[1].style.top='0';
+				    aImg[1].style.left='600px';
+
+				    num++;
+				    if(num==arrImg.length){
+				    	num=0;
+				    }
+				    aImg[1].src=arrImg[num];
+				    move(oWrap,'left',-600,20,20,function(){
+				    	aImg[0].src=aImg[1].src;
+				        oWrap.style.left='0';
+				        clearBullets();
+				        aLi[num].style.background='#000';
+				    });
+			    },2000);
+			}
+			fnTime();
+
+			oShowbox.onmouseout=function(){
+				fnTime();
+			}
+			oShowbox.onmouseover=function(){
+				clearInterval(timer);
+			}
+
+            //点击切换图片
+			oNext.onclick=function(){
+				if(!oWrap.moved){
+					return;
+				}
+				aImg[1].style.position='absolute';
+				aImg[1].style.top='0';
+				aImg[1].style.left='600px';
+
+				num++;
+				if(num==arrImg.length){
+					num=0;
+				}
+				aImg[1].src=arrImg[num];
+				move(oWrap,'left',-600,20,20,function(){
+				    	aImg[0].src=aImg[1].src;
+				        oWrap.style.left='0';
+				        clearBullets();
+				        aLi[num].style.background='#000';
+				    });
+			}
+
+			oPrev.onclick = function(){
+				if(!oWrap.moved){
+					return;
+				}
+				aImg[1].style.position='absolute';
+				aImg[1].style.top='0';
+				aImg[1].style.left='-600px';
+
+				num--;
+				if(num<0) {
+					num=arrImg.length-1;
+				}
+				aImg[1].src=arrImg[num];
+
+				move(oWrap,'left',600,20,20, function(){
+				    	aImg[0].src=aImg[1].src;
+				        oWrap.style.left='0';
+				        clearBullets();
+				        aLi[num].style.background='#000';
+				    });
+			}
+            
+
+            //点击li切换图片
+			for(var i=0; i<aLi.length; i++){
+				aLi[i].index = i;
+				aLi[i].onclick = function(){
+					var _index = this.index;
+					if (num==this.index) {
+						return;
+					}
+					if(num<this.index) {
+						aImg[1].style.position='absolute';
+						aImg[1].style.top='0';
+						aImg[1].style.left='600px';
+
+						aImg[1].src=arrImg[this.index];
+						move(oWrap,'left',-600,20,20,function(){
+				    	    aImg[0].src=aImg[1].src;
+				            oWrap.style.left='0';
+				            clearBullets();
+				            aLi[num].style.background='#000';
+				        });
+
+					}
+
+					if(num>this.index) {
+						aImg[1].style.position='absolute';
+						aImg[1].style.top='0';
+						aImg[1].style.left='-600px';
+
+						aImg[1].src=arrImg[this.index];
+						move(oWrap,'left',600,20,20,function(){
+				    	    aImg[0].src=aImg[1].src;
+				            oWrap.style.left='0';
+				            clearBullets();
+				            aLi[num].style.background='#000';
+				        });
+					}
+
+				}
+			}
+
+            function getStyle(obj, attr){  //attr样式名称
+			    return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj)[attr];
+		    }
+
+		    function move(obj, attr, dir, step, frequency, endFn) {
+			    if(!obj.moved) return;
+			    var startVal=parseInt(getStyle(obj, attr));  //开始的位置
+			    var times=0;
+			    obj.moved=false;
+			    step=dir > 0 ? step : -step; //方向  
+			    clearInterval(obj.move);
+		    	obj.move=setInterval(function(){
+			    	obj.style[attr]=parseInt(getStyle(obj, attr))+step+'px';  //往哪个方向运动
+			    	times++;
+			    	if(Math.abs(step*times) > Math.abs(dir)) {
+				    	clearInterval(obj.move);
+				    	obj.style[attr]=startVal+dir+'px';
+				    	obj.moved=true;
+				    	endFn&&endFn();  //回调函数：如果endFn存在，则endFn();
+				    }
+
+			    }, frequency)
+		    }
+
+	    	//清除之前的li
+	     	function clearBullets(){
+		    	for(var i=0; i<aLi.length; i++){
+			    	aLi[i].style.background = '#fff';
+			    }
+	    	}
+
+		}
+	</script>
+</head>
+<body>
+	<div id="showbox">
+		<div id="wrap">
+			<img src = "" />
+			<img src = "" />
+		</div>
+		
+		<span id="prev">&lt;</span>
+		<span id="next">&gt;</span>
+
+		<ul id="bullets">
+			<!-- <li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li> -->
+		</ul>
+		
+	</div>
+</body>
+</html>
