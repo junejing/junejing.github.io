@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>排序</title>
+	<meta name="name" charset=utf-8 content="content">
+	<style type="text/css" media="screen">
+		*{margin: 0;padding: 0;}
+		body{background: #fff;}
+		a{text-decoration: none;}
+		#wrapper{width: 600px;margin: 50px auto;}
+		#txt{line-height: 28px;}
+		#btn{width: 50px;height: 30px;border-radius: 5px;}
+		#tab{margin-top: 8px;width: 600px;font-size: 18px;line-height: 35px;text-align: center;border-collapse: collapse;border: 1px solid #ccc;}
+		#tab th, #tab td{border: 1px solid #ccc;}
+		#tab th{background: #f5f5f5;}
+		#tab tr:nth-child(even) td{background: #dff0d8;}
+		#tab tr:hover td{background: #fcf8e3;}
+	</style>
+	<script type="text/javascript" charset="utf-8" async defer>
+	window.onload=function(){
+		var oBtn=document.getElementById('btn');
+		var oTab=document.getElementById('tab');
+		var aTr=oTab.getElementsByTagName('tr');
+		var aDel=oTab.getElementsByTagName('a');
+    var arr=[];
+    var bAsc=true;  //true时从小到大，false从大到小
+
+    //删除
+    for(var i=0;i<aDel.length;i++){
+      aDel[i].onclick=function(){
+        oTab.tBodies[0].removeChild(this.parentNode.parentNode);
+        }
+    }  
+
+    //排序  
+    oBtn.onclick=function(){
+        
+        //1.转成数组：把tr转成数组
+        for(var i=0;i<aTr.length;i++){
+          arr[i]=aTr[i];
+        }
+
+        //2.数组排序
+        if(bAsc){
+          arr.sort(function(tr1,tr2){
+            return parseInt(tr1.cells[0].innerHTML)-parseInt(tr2.cells[0].innerHTML);
+          });
+        }else{
+          arr.sort(function(tr1,tr2){
+            return parseInt(tr2.cells[0].innerHTML)-parseInt(tr1.cells[0].innerHTML);
+          });
+        }
+
+        //3.重新插入
+        for(var i=0;i<aTr.length;i++){
+          oTab.tBodies[0].appendChild(arr[i]);
+        }
+
+        bAsc =! bAsc; //判断btn点击
+
+    }   
+
+	}
+	</script>
+</head>
+<body>
+<div id='wrapper'>
+    <input type="button" id='btn' value="排序"><br>
+    <table id='tab' border="1px" width="400px">
+   	<thead id='head'>
+   		<tr>
+   			<th>ID</th>
+   			<th>姓名</th>
+   			<th>备注</th>
+   		</tr>
+   	</thead>
+   	<tbody>
+   		<tr>
+   			<td>11</td>
+   			<td>鹿晗</td>
+   			<td><a href="#">delete</a></td>
+   		</tr>
+   		<tr>
+   			<td>2</td>
+   			<td>张艺兴</td>
+   			<td><a href="#">delete</a></td>
+   		</tr>
+   		<tr>
+   			<td>8</td>
+   			<td>孙红雷</td>
+   			<td><a href="#">delete</a></td>
+   		</tr>
+   		<tr>
+   			<td>13</td>
+   			<td>罗志祥</td>
+   			<td><a href="#">delete</a></td>
+   		</tr>
+      <tr>
+        <td>5</td>
+        <td>黄磊</td>
+        <td><a href="#">delete</a></td>
+      </tr>
+      <tr>
+        <td>37</td>
+        <td>赵丽颖</td>
+        <td><a href="#">delete</a></td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>白百何</td>
+        <td><a href="#">delete</a></td>
+      </tr>
+   	</tbody>
+   </table>	
+ </div>
+</body>
+</html>
