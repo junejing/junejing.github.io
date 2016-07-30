@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>淘宝商品广告轮播</title>
+	<meta name="name" charset=utf-8 content="content">
+	<style type="text/css" media="screen">
+		*{margin: 0;padding: 0;}
+		img{width: 210px; height: 210px;}
+		li{list-style: none;}
+		#wrap{width: 306px;height: 210px;border: 1px  solid #ff6300;margin: 0 auto;}
+		.list_left{float: left;}
+		.list_right{float: right;}
+		li{width: 46px;height: 28px;line-height: 28px;border: 1px solid #ff6300;font-size: 15px;text-align: center;}
+	    .active{background: #ff8494;color: #fff;}
+	</style>
+	<script type="text/javascript" charset="utf-8" async defer>
+    window.onload=function(){
+    	var oDiv=document.getElementById('wrap');
+    	var aUl=oDiv.getElementsByTagName('ul');
+    	var oImg=oDiv.getElementsByTagName('img')[0];
+
+    	var arrImg=['images/1.jpg','images/2.jpg','images/3.jpg','images/4.jpg','images/5.jpg','images/6.jpg','images/7.jpg','images/8.jpg','images/9.jpg','images/10.jpg','images/11.jpg','images/12.jpg','images/13.jpg','images/14.jpg'];
+    	var arrTxt=['连衣裙','雪纺','T恤','铅笔裤','婚纱','外套','连体裤','包包','凉鞋','单鞋','太阳镜','丝袜','帆布鞋','情侣鞋'];
+    	var len=arrImg.length;
+    	var timer=null;
+    	var num=0;
+    	var oldNum=0;
+
+        //在div两侧添加li
+        for(var i=0;i<len/2;i++){
+        	aUl[0].innerHTML+='<li>'+arrTxt[i]+'</li>';
+        	aUl[1].innerHTML+='<li>'+arrTxt[i+len/2]+'</li>';
+        }  
+
+        var aLi_L=aUl[0].getElementsByTagName('li');
+        var aLi_R=aUl[1].getElementsByTagName('li');
+        var arrLi=[];
+
+        //把aLi全部添加到arrLi数组中
+        for(var i=0;i<aLi_L.length;i++){
+        	arrLi.push(aLi_L[i]);
+        }
+        for(var i=0;i<aLi_R.length;i++){
+        	arrLi.push(aLi_R[i]);
+        }
+
+
+        init(0); 
+         
+        fnTime(0); 
+
+        //鼠标移入，清除定时器
+        oDiv.onmouseover=function(){
+        	clearInterval(timer);
+        }
+
+        //鼠标移出，开启定时器
+        oDiv.onmouseout=function(){
+        	fnTime(n);
+        }
+
+        //鼠标移入、移出效果
+        for(var i=0;i<len;i++){
+        	arrLi[i].index=i;
+        	arrLi.onmouseover=function(){
+        		init(this.index);
+        	}
+        	
+        }
+
+
+        //初始化函数
+        function init(n){
+        	oImg.src=arrImg[n];        	
+            arrLi[oldNum].className='';
+            arrLi[n].className='active';
+            oldNum=n;
+        }
+
+        //定时切换函数
+        function fnTime(n){
+        	timer=setInterval(function(){
+
+                if(n==len/2){   //顺序切换
+                	n=len/2+1;
+                }else if(n==len){
+                	n=0;
+                }
+
+                n++;
+                init(n);
+
+        	},1000);
+        }
+
+    }
+	</script>
+</head>
+<body>
+    <div id='wrap'>
+	    <ul class='list_left'>
+	    	<!-- <li class="category"></li>
+	    	<li></li>
+	    	<li></li>
+	    	<li></li>
+	    	<li></li>
+	    	<li></li>
+	    	<li></li> -->
+	    </ul>
+	    <a href="#"><img src="images/1.jpg" /></a>
+	    <ul class='list_right'>
+	    	<!-- <li class="category"></li>
+	    	<li></li>
+	    	<li></li>
+	    	<li></li>
+	    	<li></li>
+	    	<li></li>
+	    	<li></li> -->
+	    </ul>
+    </div>
+</body>
+</html>
