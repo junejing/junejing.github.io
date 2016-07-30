@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>滚动的新闻</title>
+	<meta name="name" charset=utf-8 content="content">
+	<style type="text/css" media="screen">
+		*{margin: 0;padding: 0;}
+		body{background: #FFDAB9;}
+		#news{width: 300px; height: 150px;margin: 0 auto;background: #FFDAB9; border: 1px solid #000;border-radius: 5px;text-align: center;overflow: hidden;}
+	</style>
+	<script type="text/javascript" charset="utf-8" async defer>
+    window.onload=function(){
+    	var oDiv = document.getElementById('news');
+    	var timer=null;
+        oDiv.innerHTML+=oDiv.innerHTML;
+        function mm(){
+            oDiv.scrollTop++;
+            if(oDiv.scrollTop>=170){
+                oDiv.scrollTop = 0;
+            } 
+            document.title = oDiv.scrollTop;   
+        }
+        
+        timer = setInterval(mm,12);
+        oDiv.onmouseover = function(){clearInterval(timer);}
+        oDiv.onmouseout = function(){
+        	timer = setInterval(mm,12);
+        }
+        
+    }
+	</script>
+</head>
+<body>
+<div id='news'>
+	<a href="#">人社部年内出延迟退休方案</a><br>
+    <a href="#">中央国家机关会议费上浮</a><br>
+    <a href="#">中央国家机关会议费上浮</a><br>
+    <a href="#">美核潜艇停釜山港</a><br>
+    <a href="#">华裔男子被桶多刀</a><br>
+    <a href="#">浙江路边现食人鱼</a><br>
+    <a href="#">习近平关于领土主权和南海问题</s><br>
+    <a href="#">李克强任内首访蒙古国</a><br>
+    <a href="#">中央气象台暴雨强对流预警</a><br>
+    <a href="#">女孩地铁上怒斥咸猪手出站后挨打</a><br>
+    
+</div>
+</body>
+</html>
