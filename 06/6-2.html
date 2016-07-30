@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>添加删除行</title>
+	<meta name="name" charset=utf-8 content="content">
+	<style type="text/css" media="screen">
+		*{margin: 0;padding: 0;}
+		body{background: #fff;}
+		a{text-decoration: none;}
+		#wrapper{width: 600px;margin: 50px auto;}
+		#txt{line-height: 28px;}
+		#btn{width: 50px;height: 30px;border-radius: 5px;}
+		#tab{margin-top: 8px;width: 600px;font-size: 18px;line-height: 35px;text-align: center;border-collapse: collapse;border: 1px solid #ccc;}
+		#tab th, #tab td{border: 1px solid #ccc;}
+		#tab th{background: #f5f5f5;}
+		#tab tr:nth-child(even) td{background: #dff0d8;}
+		#tab tr:hover td{background: #fcf8e3;}
+	</style>
+	<script type="text/javascript" charset="utf-8" async defer>
+	window.onload=function(){
+		var oWrap=document.getElementById('wrapper');
+		var oTxt=document.getElementById('txt');
+		var oBtn=document.getElementById('btn');
+		var oTab=document.getElementById('tab');
+		var aTr=oTab.getElementsByTagName('tr');
+		var aDel=oTab.getElementsByTagName('a');
+        var iNum=oTab.tBodies[0].rows.length+1; //当前行号
+        var n=0;
+
+        //添加一行
+        oBtn.onclick=function(){
+        	var oTr=document.createElement('tr');
+        	var oTd=null;
+
+        	oTd=document.createElement('td');
+        	oTd.innerHTML=iNum++;
+        	oTr.appendChild(oTd);
+
+        	oTd=document.createElement('td');
+        	oTd.innerHTML=oTxt.value;
+        	oTr.appendChild(oTd);
+
+        	oTd=document.createElement('td');
+        	oTd.innerHTML='<a href="#">delete</a>';
+        	oTr.appendChild(oTd);
+
+        	oTxt.value='';
+
+            //删除新添加的delete按钮
+            oTd.getElementsByTagName('a')[0].onclick=function(){
+            	oTab.tBodies[0].removeChild(this.parentNode.parentNode);
+            }
+
+            oTab.tBodies[0].appendChild(oTr);
+
+        }
+
+        //删除原来的delete
+        for(var i=0;i<aDel.length;i++){
+            aDel[i].onclick=function(){
+        	    oTab.tBodies[0].removeChild(this.parentNode.parentNode);
+            }
+        }       
+
+	}
+	</script>
+</head>
+<body>
+<div id='wrapper'>
+    <input type="text" id='txt'>
+    <input type="button" id='btn' value="添加"><br>
+    <table id='tab' border="1px" width="400px">
+   	<thead id='head'>
+   		<tr>
+   			<th>ID</th>
+   			<th>姓名</th>
+   			<th>备注</th>
+   		</tr>
+   	</thead>
+   	<tbody>
+   		<tr>
+   			<td>1</td>
+   			<td>鹿晗</td>
+   			<td><a href="#">delete</a></td>
+   		</tr>
+   		<tr>
+   			<td>2</td>
+   			<td>张艺兴</td>
+   			<td><a href="#">delete</a></td>
+   		</tr>
+   		<tr>
+   			<td>3</td>
+   			<td>孙红雷</td>
+   			<td><a href="#">delete</a></td>
+   		</tr>
+   		<tr>
+   			<td>4</td>
+   			<td>罗志祥</td>
+   			<td><a href="#">delete</a></td>
+   		</tr>
+   	</tbody>
+   </table>	
+ </div>
+</body>
+</html>
